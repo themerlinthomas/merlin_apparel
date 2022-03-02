@@ -26,13 +26,13 @@ class SignUp extends React.Component {
 
         try {
             const { user } = await auth.createUserWithEmailAndPassword(email, password);
-           await createUserProfileDocument(user, { displayName });
-           this.setState({
-               displayName:'',
-               email:'',
-               password:'',
-               confirmPassword:''
-           })
+            await createUserProfileDocument(user, { displayName });
+            this.setState({
+                displayName: '',
+                email: '',
+                password: '',
+                confirmPassword: ''
+            });
 
         }
         catch (error) {
@@ -41,9 +41,9 @@ class SignUp extends React.Component {
     }
 
     handleChange = event => {
-        const {name, value} = event.target;
-        this.setState({[name]:value});
-    }
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
+    };
 
     render() {
         const { displayName, email, password, confirmPassword } = this.state;
@@ -53,7 +53,7 @@ class SignUp extends React.Component {
                 <span>
                     Sign up with your email and password
                 </span>
-                <form>
+                <form className='sign-up-form' onSubmit={this.handleSubmit}>
                     <FormInput
                         type='text'
                         name='displayName'
