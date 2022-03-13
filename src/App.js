@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import HomePage from './pages/homepage/homepage.component';
+import {createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
@@ -8,7 +10,8 @@ import SignInSignUpComponent from './pages/sign-in-n-sign-up/sign-in-n-sign-up.c
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import React from 'react';
 import { setCurrentUser } from './redux/user/user.actions';
-import { connect } from 'react-redux';
+import { selectCurrentUser } from './redux/user/user.selectors';
+
 
 class App extends React.Component {
   /* we don't need it now because of mapDispatchToProps method
@@ -61,8 +64,8 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 })
 
 const mapDispatchToProps = dispatch => ({
